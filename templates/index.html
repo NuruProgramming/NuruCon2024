@@ -1,0 +1,400 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="{% static 'nuru.svg' %}">
+    <title>Nuru Con - First Meetup of Nuru Programming Language</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'styles.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/htmx.org@2.0.2"
+        integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="">
+                <img src="{% static 'nuru.svg' %}" alt="Nuru Logo" height="60">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#become-speaker">Become a Speaker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#become-sponsor">Become a Sponsor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#register">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <header
+            class="flex-grow-1 d-flex flex-column justify-content-center align-items-center bg-light header-bg full-height-header">
+            <div class="container text-center">
+                <h1
+                    class="display-1 mb-5 text-white font-weight-bold text-shadow animate__animated animate__fadeInDown">
+                    Karibu Nuru Con! 🎉
+                </h1>
+                <p class="lead mb-5 text-white animate__animated animate__fadeInUp"
+                    style="font-size: 2.2rem; font-weight: 400; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                    Jiunge na mapinduzi! Shiriki katika mkutano wa kwanza kabisa wa Nuru, lugha ya programu ya Kiswahili
+                    inayovunja mipaka 🚀
+                </p>
+                <div class="row justify-content-center">
+                    <div class="col-md-3 mb-4 mx-2">
+                        <div class="info-card bg-white p-3 rounded shadow">
+                            <i class="fas fa-calendar-alt fa-2x mb-2 text-primary"></i>
+                            <h3 class="h5 font-weight-bold text-uppercase">Date</h3>
+                            <p class="mb-0 text-muted small">October 5, 2024</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4 mx-2">
+                        <a href="https://maps.app.goo.gl/uZbP5C4XrhHiz36Z7" target="_blank" class="text-decoration-none">
+                            <div class="info-card bg-white p-3 rounded shadow">
+                                <i class="fas fa-map-marker-alt fa-2x mb-2 text-primary"></i>
+                                <h3 class="h5 font-weight-bold text-uppercase">Location</h3>
+                                <p class="mb-0 text-muted small">Binary Labs, Dar Es Salaam</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-4 mx-2">
+                        <div class="info-card bg-white p-3 rounded shadow">
+                            <i class="fas fa-users fa-2x mb-2 text-primary"></i>
+                            <h3 class="h5 font-weight-bold text-uppercase">Attendees</h3>
+                            <p class="mb-0 text-muted small">
+                                <span hx-get="{% url 'registration_count' %}" hx-trigger="load, attendeesUpdated from:body" hx-swap="innerHTML">
+                                    {{ registration_count.count }} and counting
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#register"
+                    class="btn btn-primary btn-lg mt-4 mb-5 px-5 py-3 font-weight-bold text-uppercase">Register Now</a>
+            </div>
+        </header>
+        <div class="main-content container mt-5">
+            <section id="about" class="mb-5 py-5"
+                style="background-color: #ff7656; background-image: linear-gradient(135deg, #ff7656, #ff9980, #ffbcab);">
+                <div class="container">
+                    <h2 class="section-title display-4 mb-4 text-center text-white">About Nuru and Nuru Con</h2>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="p-4 rounded shadow-sm h-100"
+                                style="background-color: rgba(255, 255, 255, 0.9); border-left: 5px solid #ff7656;">
+                                <h3 class="h4 mb-3" style="color: #ff7656;">What is Nuru?</h3>
+                                <p class="lead">
+                                    Nuru is a groundbreaking Swahili programming language designed to make coding
+                                    accessible to Swahili speakers. It bridges the gap between technology and language,
+                                    empowering millions to learn and create in their native tongue.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="p-4 rounded shadow-sm h-100"
+                                style="background-color: rgba(255, 255, 255, 0.9); border-left: 5px solid #ff7656;">
+                                <h3 class="h4 mb-3" style="color: #ff7656;">What is Nuru Con?</h3>
+                                <p class="lead">
+                                    Nuru Con is the first-ever meetup for Nuru enthusiasts, developers, and learners.
+                                    It's a platform to come together, share knowledge, and explore the endless
+                                    possibilities of this innovative language.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="text-center mt-4"> -->
+                    <!--     <a href="#schedule" class="btn btn-primary btn-lg" style="background-color: #ff9980; border-color: #ff9980;">View Conference Schedule</a> -->
+                    <!-- </div> -->
+                </div>
+            </section>
+            <section id="speakers" class="mb-5 text-center">
+                <h2 class="section-title display-4 mb-4 fw-bold">Speakers</h2>
+                <div class="row">
+                    {% if speakers %}
+                        {% for speaker in speakers %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card border-0 bg-transparent">
+                                <img src="{{ speaker.image }}"
+                                    class="card-img-top rounded-circle w-50 mx-auto" alt="{{ speaker.name }}">
+                                <div class="card-body">
+                                    <h4 class="card-title fw-bold">{{ speaker.title }}</h4>
+                                    <h6 class="card-text text-muted">{{ speaker.name }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-center mt-5">
+                            <p class="alert alert-info p-3 shadow-sm rounded" style="background-color: rgba(230, 247, 255, 0.7);">
+                                <i class="fas fa-info-circle me-2"></i>
+                                No speakers are currently available.
+                            </p>
+                            <a href="#become-speaker" class="btn btn-primary btn-lg mt-4 mb-5 px-5 py-3 font-weight-bold text-uppercase">
+                                <i class="fas fa-user-plus me-2"></i>Become a Speaker
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            <section id="sponsors" class="mb-5 text-center">
+                <h2 class="section-title display-4 mb-4">Sponsors</h2>
+                <div class="row justify-content-center">
+                    {% if sponsors %}
+                        {% for sponsor in sponsors %}
+                        <div class="col-md-5 mb-4">
+                            <div class="card h-100 bg-transparent border-0">
+                                <div class="card-body d-flex align-items-center justify-content-center">
+                                    <img src="{{ sponsor.logo }}" alt="{{ sponsor.name }}"
+                                        class="img-fluid sponsor-logo" style="max-width: 250px; max-height: 125px;">
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-center mt-5">
+                            <p class="alert alert-info p-3 shadow-sm rounded" style="background-color: rgba(230, 247, 255, 0.7);">
+                                <i class="fas fa-info-circle me-2"></i>
+                                No sponsors are currently available.
+                            </p>
+                            <a href="#become-sponsor" class="btn btn-primary btn-lg mt-4 mb-5 px-5 py-3 font-weight-bold text-uppercase">
+                                <i class="fas fa-handshake me-2"></i>Become a Sponsor
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer py-3 mt-5">
+            <div class="container text-center">
+                <span class="text-dark mx-2">NuruCon 2024</span>
+                <span class="text-dark mx-2 fw-bold">┃</span>
+                <a href="https://nuruprogramming.org" target="_blank" class="text-dark mx-2"><i class="fas fa-globe"></i></a>
+                <a href="https://github.com/nuru-lang" target="_blank" class="text-dark mx-2"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/nuru_lang" target="_blank" class="text-dark mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="https://t.me/nuru_lang" target="_blank" class="text-dark mx-2"><i class="fab fa-telegram"></i></a>
+            </div>
+        </footer>
+
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerModalLabel">Register for Nuru Con</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="registerForm" hx-post="{% url 'submit_registration' %}" hx-target="#registerFormResponse" hx-on::after-request="if(event.detail.successful) { this.reset(); closeModal('registerModal');  htmx.trigger('body', 'attendeesUpdated'); }">
+								{% csrf_token %}
+								<div class="mb-3">
+								    <label for="name" class="form-label">Full Name</label>
+								    <input type="text" class="form-control" id="name" name="name" required>
+								</div>
+								<div class="mb-3">
+								    <label for="email" class="form-label">Email address</label>
+								    <input type="email" class="form-control" id="email" name="email" required>
+								</div>
+								<div class="mb-3">
+								    <label for="phone" class="form-label">Phone Number</label>
+								    <input type="text" class="form-control" id="phone" name="phone" required>
+								</div>
+								<button type="submit" class="btn btn-primary">Register</button>
+                            </form>
+                        <div id="registerFormResponse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Become a Speaker Modal -->
+        <div class="modal fade" id="speakerModal" tabindex="-1" aria-labelledby="speakerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="speakerModalLabel">Become a Speaker</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="speakerForm" hx-post="{% url 'submit_speaker' %}" hx-encoding="multipart/form-data" hx-target="#formResponse" hx-on::after-request="if(event.detail.successful) { this.reset(); closeModal('speakerModal'); }">
+								{% csrf_token %}
+								<div class="mb-3">
+								    <label for="speakerName" class="form-label">Full Name</label>
+								    <input type="text" class="form-control" id="speakerName" name="name" placeholder="Your name" required>
+								</div>
+								<div class="mb-3">
+								    <label for="speakerEmail" class="form-label">Email address</label>
+								    <input type="email" class="form-control" id="speakerEmail" name="email" placeholder="Your email" required>
+								</div>
+								<div class="mb-3">
+								    <label for="speakerNumber" class="form-label">Phone Number</label>
+								    <input type="text" class="form-control" id="speakerNumber" name="number" placeholder="+255 789 000 000" required>
+								</div>
+								<div class="mb-3">
+								    <label for="talkTitle" class="form-label">Proposed Talk Topic</label>
+								    <input type="text" class="form-control" id="talkTitle" name="title" placeholder="Enter your talk topic" required>
+								</div>
+								<div class="mb-3">
+								    <label for="talkDescription" class="form-label">Proposed Talk Description</label>
+								    <textarea class="form-control" id="talkDescription" name="description" rows="3" placeholder="Briefly describe your talk" required></textarea>
+								</div>
+								<div class="mb-3">
+								    <label for="speakerPhoto" class="form-label">Speaker Photo</label>
+								    <input type="file" class="form-control" id="speakerPhoto" name="image" accept="image/*">
+								</div>
+								<button type="submit" class="btn btn-primary">Submit Proposal</button>
+                            </form>
+                        <div id="formResponse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="sponsorModal" tabindex="-1" aria-labelledby="sponsorModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="sponsorModalLabel">Become a Sponsor</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="sponsorForm" hx-post="{% url 'submit_sponsor' %}" hx-encoding="multipart/form-data" hx-target="#sponsorFormResponse" hx-on::after-request="if(event.detail.successful) { this.reset(); closeModal('sponsorModal'); }">
+								{% csrf_token %}
+								<div class="mb-3">
+								    <label for="companyName" class="form-label">Company Name</label>
+								    <input type="text" class="form-control" id="companyName" name="name" placeholder="e.g. ABC Corporation" required>
+								</div>
+								<div class="mb-3">
+								    <label for="email" class="form-label">Company Email</label>
+								    <input type="email" class="form-control" id="email" name="email" placeholder="e.g. contact@abccorp.com" required>
+								</div>
+								<div class="mb-3">
+								    <label for="phone" class="form-label">Company Phone Number</label>
+								    <input type="text" class="form-control" id="phone" name="number" placeholder="e.g. +255 700 123 456" required>
+								</div>
+								<div class="mb-3">
+								    <label for="sponsorLogo" class="form-label">Company Logo</label>
+								    <input type="file" class="form-control" id="sponsorLogo" name="logo" accept="image/*" required>
+								</div>
+								<div class="mb-3">
+								    <label for="website" class="form-label">Company Website</label>
+								    <input type="url" class="form-control" id="website" name="website" placeholder="e.g. https://www.abccorp.com" required>
+								</div>
+								<div class="mb-3">
+								    <label for="sponsorDescription" class="form-label">Company Description</label>
+								    <textarea class="form-control" id="sponsorDescription" name="description" rows="3" placeholder="e.g. ABC Corporation is a leading provider of innovative solutions..."></textarea>
+								</div>
+								<button type="submit" class="btn btn-primary">Submit Interest</button>
+                            </form>
+                        <div id="sponsorFormResponse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('a[href="#register"]').setAttribute('data-bs-toggle', 'modal');
+        document.querySelector('a[href="#register"]').setAttribute('data-bs-target', '#registerModal');
+
+        document.querySelector('a[href="#become-speaker"]').setAttribute('data-bs-toggle', 'modal');
+        document.querySelector('a[href="#become-speaker"]').setAttribute('data-bs-target', '#speakerModal');
+
+        document.querySelector('a[href="#become-sponsor"]').setAttribute('data-bs-toggle', 'modal');
+        document.querySelector('a[href="#become-sponsor"]').setAttribute('data-bs-target', '#sponsorModal');
+
+        document.querySelectorAll('.btn').forEach(function(btn) {
+            if (btn.textContent.trim() === 'Register Now') {
+                btn.setAttribute('data-bs-toggle', 'modal');
+                btn.setAttribute('data-bs-target', '#registerModal');
+            } else if (btn.textContent.trim() === 'Become a Speaker') {
+                btn.setAttribute('data-bs-toggle', 'modal');
+                btn.setAttribute('data-bs-target', '#speakerModal');
+            } else if (btn.textContent.trim() === 'Become a Sponsor') {
+                btn.setAttribute('data-bs-toggle', 'modal');
+                btn.setAttribute('data-bs-target', '#sponsorModal');
+            }
+        });
+    });
+
+    function closeModal(modalId) {
+        var modal = document.getElementById(modalId);
+        var bootstrapModal = bootstrap.Modal.getInstance(modal);
+        bootstrapModal.hide();
+    }
+
+    document.body.addEventListener('htmx:afterOnLoad', function (event) {
+        var targetId = event.detail.target.id;
+        var response;
+
+        try {
+            if (event.detail.xhr.getResponseHeader('Content-Type').includes('application/json')) {
+                response = JSON.parse(event.detail.xhr.response);
+            } else {
+                response = event.detail.xhr.response;
+            }
+        } catch (e) {
+            console.error("Failed to process response:", e);
+            return;
+        }
+
+        if (targetId === 'formResponse' || targetId === 'registerFormResponse' || targetId === 'sponsorFormResponse') {
+            if (response.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: targetId === 'registerFormResponse' ? 'Karibu sana!' : 'Thank you!',
+                    text: response.message,
+                    confirmButtonColor: '#3085d6'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error: ' + JSON.stringify(response.errors),
+                    confirmButtonColor: '#d33'
+                });
+            }
+        }
+    });
+
+    ['registerModal', 'speakerModal', 'sponsorModal'].forEach(function (modalId) {
+        document.getElementById(modalId).addEventListener('hidden.bs.modal', function () {
+            var responseDiv;
+            switch (modalId) {
+                case 'registerModal':
+                    responseDiv = document.getElementById('registerFormResponse');
+                    break;
+                case 'speakerModal':
+                    responseDiv = document.getElementById('formResponse');
+                    break;
+                case 'sponsorModal':
+                    responseDiv = document.getElementById('sponsorFormResponse');
+                    break;
+            }
+            if (responseDiv) {
+                responseDiv.innerHTML = '';
+            }
+        });
+    });
+</script>
+</body>
+
+</html>
