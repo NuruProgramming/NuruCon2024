@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 
 from .forms import SpeakerForm, RegistrationForm, SponsorForm
-from .models import Speaker, Sponsor, Registration
+from .models import Speaker, Sponsor, Registration, Schedule, MasterOfConference
 
 
 def index(request):
@@ -10,11 +10,15 @@ def index(request):
     registration_count = Registration.objects.count()
     speakers = Speaker.objects.filter(approved=True).values('name', 'title', 'image')
     sponsors = Sponsor.objects.filter(approved=True).values('name', 'logo', 'website')
+    schedule = Schedule.objects.all()
+    mc = MasterOfConference.objects.first()
     return render(request, "index.html", {
         'speaker_count': speaker_count,
         'registration_count': registration_count,
         'speakers': speakers,
-        'sponsors': sponsors
+        'sponsors': sponsors,
+        'schedule': schedule,
+        'mc': mc
     })
 
 def submit_speaker(request):
