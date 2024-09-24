@@ -129,9 +129,11 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="text-center mt-4"> -->
-                    <!--     <a href="#schedule" class="btn btn-primary btn-lg" style="background-color: #ff9980; border-color: #ff9980;">View Conference Schedule</a> -->
-                    <!-- </div> -->
+                    <div class="text-center mt-4">
+                        <a href="#schedule" class="btn btn-primary btn-lg" style="background-color: #ff9980; border-color: #ff9980;">
+        <i class="fas fa-calendar-alt me-2"></i>View Conference Schedule
+                        </a>
+                    </div>
                 </div>
             </section>
             <section id="speakers" class="mb-5 text-center">
@@ -319,6 +321,51 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scheduleModalLabel">Conference Schedule</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% if schedule %}
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Title</th>
+                                    <th>Speaker</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in schedule %}
+                                <tr>
+                                    <td>{{ item.start_time|date:"M j, Y g:i A" }}</td>
+                                    <td>{{ item.speaker.title }}</td>
+                                    <td>{{ item.speaker }}</td>
+                                    <td>{{ item.duration }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p class="text-center">No schedule available at the moment. Please check back later.</p>
+                    {% endif %}
+
+                    <div class="mt-4">
+                        <h6 class="text-center">Master of Ceremonies</h6>
+                        <div class="text-center">
+                            <img src="{{ mc.image }}" alt="{{ mc.name }}" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                            <p class="mt-2 mb-0"><strong>{{ mc.name }}</strong></p>
+                            <p class="text-muted">{{ mc.title }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -331,6 +378,11 @@
         document.querySelector('a[href="#become-sponsor"]').setAttribute('data-bs-toggle', 'modal');
         document.querySelector('a[href="#become-sponsor"]').setAttribute('data-bs-target', '#sponsorModal');
 
+
+        document.querySelector('a[href="#schedule"]').setAttribute('data-bs-toggle', 'modal');
+        document.querySelector('a[href="#schedule"]').setAttribute('data-bs-target', '#scheduleModal');
+
+
         document.querySelectorAll('.btn').forEach(function(btn) {
             if (btn.textContent.trim() === 'Register Now') {
                 btn.setAttribute('data-bs-toggle', 'modal');
@@ -341,7 +393,10 @@
             } else if (btn.textContent.trim() === 'Become a Sponsor') {
                 btn.setAttribute('data-bs-toggle', 'modal');
                 btn.setAttribute('data-bs-target', '#sponsorModal');
-            }
+            } else if (btn.textContent.trim() === 'View Conference Schedule') {
+		        btn.setAttribute('data-bs-toggle', 'modal');
+		        btn.setAttribute('data-bs-target', '#scheduleModal');
+		    }
         });
     });
 
@@ -385,7 +440,7 @@
         }
     });
 
-    ['registerModal', 'speakerModal', 'sponsorModal'].forEach(function (modalId) {
+    ['registerModal', 'speakerModal', 'sponsorModal', 'scheduleModal'].forEach(function (modalId) {
         document.getElementById(modalId).addEventListener('hidden.bs.modal', function () {
             var responseDiv;
             switch (modalId) {
