@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+import uuid
+import os
 
 
 class Speaker(models.Model):
@@ -14,6 +16,12 @@ class Speaker(models.Model):
 
     def __str__(self):
         return self.title
+    def save(self, *args, **kwargs):
+        if self.image:
+            ext = self.image.name.split(".")[-1]
+            filename = f"{uuid.uuid4()}.{ext}"
+            self.image.name = os.path.join("static/uploads/", filename)
+        super().save(*args, **kwargs)
 
 class Registration(models.Model):
     id = models.AutoField(primary_key=True)
