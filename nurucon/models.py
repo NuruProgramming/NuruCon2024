@@ -15,7 +15,7 @@ class Speaker(models.Model):
     approved = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return self.name
     def save(self, *args, **kwargs):
         if self.image:
             ext = self.image.name.split(".")[-1]
