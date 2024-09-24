@@ -19,8 +19,7 @@ class Speaker(models.Model):
     def save(self, *args, **kwargs):
         if self.image:
             ext = self.image.name.split(".")[-1]
-            filename = f"{uuid.uuid4()}.{ext}"
-            self.image.name = os.path.join("static/uploads/", filename)
+            self.image.name = f"{uuid.uuid4()}.{ext}"
         super().save(*args, **kwargs)
 
 class Registration(models.Model):
