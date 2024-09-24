@@ -29,6 +29,9 @@ CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', 'http://loc
 
 ADMIN_URL = os.environ.get('DJANGO_ADMIN_URL', 'admin/')
 
+ADMINS = [('Admin', os.environ.get('DJANGO_ADMIN_EMAIL', 'admin@example.com'))]
+DEFAULT_FROM_EMAIL = os.environ.get('DJANGO_DEFAULT_FROM_EMAIL', 'noreply@example.com')
+
 # Application definition
 
 INSTALLED_APPS = [
