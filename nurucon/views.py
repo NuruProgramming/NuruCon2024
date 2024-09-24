@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.core.mail import send_mail
+from django.conf import settings
 
 from .forms import SpeakerForm, RegistrationForm, SponsorForm
 from .models import Speaker, Sponsor, Registration, Schedule, MasterOfConference
@@ -25,7 +27,18 @@ def submit_speaker(request):
     if request.method == 'POST':
         form = SpeakerForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            speaker = form.save()
+            send_mail(
+                'New Speaker Submission',
+                f'New speaker submission:\n'
+                f'Name: {speaker.name}\n'
+                f'Title: {speaker.title}\n'
+                f'Email: {speaker.email}\n'
+                f'Phone: {speaker.number}',
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.ADMIN_EMAIL],
+                fail_silently=False,
+            )
             return JsonResponse({'success': True, 'message': 'We will reach out to you soon!'})
         else:
             return JsonResponse({'success': False, 'errors': form.errors})
@@ -36,7 +49,17 @@ def submit_registration(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
+            registration = form.save()
+            send_mail(
+                'New Registration',
+                f'New registration details:\n'
+                f'Name: {registration.name}\n'
+                f'Email: {registration.email}\n'
+                f'Phone: {registration.phone}',
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.ADMIN_EMAIL],
+                fail_silently=False,
+            )
             return JsonResponse({'success': True, 'message': 'Tuonane Tar 5 October 👊🏾'})
         else:
             return JsonResponse({'success': False, 'errors': form.errors})
@@ -47,12 +70,23 @@ def submit_sponsor(request):
     if request.method == 'POST':
         form = SponsorForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            sponsor = form.save()
+            send_mail(
+                'New Sponsor Submission',
+                f'''New sponsor submission:
+                Name: {sponsor.name}
+                Email: {sponsor.email}
+                Phone: {sponsor.phone_number}
+                Website: {sponsor.website}
+                Company Description: {sponsor.description}''',
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.ADMIN_EMAIL],
+                fail_silently=False,
+            )
             return JsonResponse({'success': True, 'message': 'We will reach out to you within a few hours.'})
         else:
             return JsonResponse({'success': False, 'errors': form.errors})
     return JsonResponse({'success': False, 'message': 'Invalid request method'}, status=405)
-
 
 def registration_count(request):
     count = Registration.objects.count()
