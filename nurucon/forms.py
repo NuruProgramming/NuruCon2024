@@ -14,4 +14,4 @@ class RegistrationForm(forms.ModelForm):
 class SponsorForm(forms.ModelForm):
     class Meta:
         model = Sponsor
-        fields = ['name', 'email', 'number', 'logo', 'website', 'description']
+        fields = ['name', 'email', 'number', 'logo', 'website', 'description', 'package']

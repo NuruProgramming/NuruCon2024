@@ -47,6 +47,7 @@ class Sponsor(models.Model):
     website = models.URLField()
     description = models.TextField(max_length=500, blank=True)
     approved = models.BooleanField(default=False)
+    package = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}"

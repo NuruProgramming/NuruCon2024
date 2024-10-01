@@ -69,6 +69,7 @@ def submit_sponsor(request):
                 Name: {sponsor.name}
                 Email: {sponsor.email}
                 Phone: {sponsor.phone_number}
+                Package: {sponsor.package}
                 Website: {sponsor.website}
                 Company Description: {sponsor.description}''',
             )
