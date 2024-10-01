@@ -68,7 +68,7 @@ def submit_sponsor(request):
                 f'''New sponsor submission:
                 Name: {sponsor.name}
                 Email: {sponsor.email}
-                Phone: {sponsor.phone_number}
+                Phone: {sponsor.number}
                 Package: {sponsor.package}
                 Website: {sponsor.website}
                 Company Description: {sponsor.description}''',
