@@ -281,41 +281,107 @@
         </div>
 
         <div class="modal fade" id="sponsorModal" tabindex="-1" aria-labelledby="sponsorModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="sponsorModalLabel">Become a Sponsor</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <div class="row mb-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-warning text-dark">
+                                        <h5 class="mb-0">Dhahabu (Gold)</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Naming rights as "NuruCon presented by [Your Company]"</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Prominent display of company logo on event materials</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Opportunity to give a 10-minute presentation on Nuru Programming</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Space to showcase products/services</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Logo featured on NuruCon website and social media</li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <p class="h4 text-center mb-0">500,000 Tshs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-secondary text-white">
+                                        <h5 class="mb-0">Fedha (Silver)</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Display of company logo on event banner and program</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Opportunity to give a 5-minute lightning talk on Nuru Programming</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Shared space to showcase products/services</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Logo featured on NuruCon website and social media</li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <p class="h4 text-center mb-0">300,000 Tshs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-danger text-white">
+                                        <h5 class="mb-0">Shaba (Bronze)</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Company name listed in event program</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Verbal recognition during opening and closing ceremonies</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Logo featured on NuruCon website</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i>Social media mention</li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <p class="h4 text-center mb-0">150,000 Tshs</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <form id="sponsorForm" hx-post="{% url 'submit_sponsor' %}" hx-encoding="multipart/form-data" hx-target="#sponsorFormResponse" hx-on::after-request="if(event.detail.successful) { this.reset(); closeModal('sponsorModal'); }">
-								{% csrf_token %}
-								<div class="mb-3">
-								    <label for="companyName" class="form-label">Company Name</label>
-								    <input type="text" class="form-control" id="companyName" name="name" placeholder="e.g. ABC Corporation" required>
-								</div>
-								<div class="mb-3">
-								    <label for="email" class="form-label">Company Email</label>
-								    <input type="email" class="form-control" id="email" name="email" placeholder="e.g. contact@abccorp.com" required>
-								</div>
-								<div class="mb-3">
-								    <label for="phone" class="form-label">Company Phone Number</label>
-								    <input type="text" class="form-control" id="phone" name="number" placeholder="e.g. +255 700 123 456" required>
-								</div>
-								<div class="mb-3">
-								    <label for="sponsorLogo" class="form-label">Company Logo</label>
-								    <input type="file" class="form-control" id="sponsorLogo" name="logo" accept="image/*" required>
-								</div>
-								<div class="mb-3">
-								    <label for="website" class="form-label">Company Website</label>
-								    <input type="url" class="form-control" id="website" name="website" placeholder="e.g. https://www.abccorp.com" required>
-								</div>
-								<div class="mb-3">
-								    <label for="sponsorDescription" class="form-label">Company Description</label>
-								    <textarea class="form-control" id="sponsorDescription" name="description" rows="3" placeholder="e.g. ABC Corporation is a leading provider of innovative solutions..."></textarea>
-								</div>
-								<button type="submit" class="btn btn-primary">Submit Interest</button>
-                            </form>
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="companyName" class="form-label">Company Name</label>
+                                <input type="text" class="form-control" id="companyName" name="name" placeholder="e.g. ABC Corporation" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Company Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="e.g. contact@abccorp.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Company Phone Number</label>
+                                <input type="text" class="form-control" id="phone" name="number" placeholder="e.g. +255 700 123 456" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sponsorLogo" class="form-label">Company Logo</label>
+                                <input type="file" class="form-control" id="sponsorLogo" name="logo" accept="image/*" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="website" class="form-label">Company Website</label>
+                                <input type="url" class="form-control" id="website" name="website" placeholder="e.g. https://www.abccorp.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sponsorDescription" class="form-label">Company Description</label>
+                                <textarea class="form-control" id="sponsorDescription" name="description" rows="3" placeholder="e.g. ABC Corporation is a leading provider of innovative solutions..."></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sponsorPackage" class="form-label">Sponsorship Package</label>
+                                <select class="form-select" id="sponsorPackage" name="package" required>
+                                    <option value="">Select a package</option>
+                                    <option value="gold">Dhahabu (Gold) - 500,000 Tshs</option>
+                                    <option value="silver">Fedha (Silver) - 300,000 Tshs</option>
+                                    <option value="bronze">Shaba (Bronze) - 150,000 Tshs</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Interest</button>
+                        </form>
                         <div id="sponsorFormResponse"></div>
                     </div>
                 </div>
