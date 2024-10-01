@@ -141,3 +141,6 @@ GitHub.sublime-settings
 
 # Uploads
 uploads/
+
+# Local files
+*local*
