@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
 import uuid
-import os
 
 
 class Speaker(models.Model):
@@ -78,6 +77,14 @@ class MasterOfConference(models.Model):
     email = models.EmailField()
     number = models.CharField(max_length=20)
     image = models.ImageField(upload_to="static/uploads/", null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Setting(models.Model):
+    name = models.CharField(max_length=100)
+    value = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
