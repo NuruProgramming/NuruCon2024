@@ -13,10 +13,7 @@ def index(request):
     schedule = Schedule.objects.all()
     mc = MasterOfConference.objects.first()
 
-    registration_open = Setting.objects.filter(name="registration_open").first()
-
-    if not registration_open:
-        registration_open = True
+    registration_closed = Setting.objects.filter(name="registration_closed").first()
 
     return render(request, "index.html", {
         'speaker_count': speaker_count,
@@ -25,7 +22,7 @@ def index(request):
         'sponsors': sponsors,
         'schedule': schedule,
         'mc': mc,
-        'registration_open': registration_open,
+        'registration_closed': registration_closed,
     })
 
 def submit_speaker(request):

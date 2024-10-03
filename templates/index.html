@@ -215,7 +215,7 @@
 		                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		            </div>
 		            <div class="modal-body">
-		                {% if registration_open %}
+		                {% if not registration_closed %}
 		                    <form id="registerForm" hx-post="{% url 'submit_registration' %}" hx-target="#registerFormResponse" hx-on::after-request="if(event.detail.successful) { this.reset(); closeModal('registerModal');  htmx.trigger('body', 'attendeesUpdated'); }">
 		                        {% csrf_token %}
 		                        <div class="mb-3">
