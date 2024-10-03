@@ -206,36 +206,47 @@
             </div>
         </footer>
 
-        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registerModalLabel">Register for Nuru Con</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="registerForm" hx-post="{% url 'submit_registration' %}" hx-target="#registerFormResponse" hx-on::after-request="if(event.detail.successful) { this.reset(); closeModal('registerModal');  htmx.trigger('body', 'attendeesUpdated'); }">
-								{% csrf_token %}
-								<div class="mb-3">
-								    <label for="name" class="form-label">Full Name</label>
-								    <input type="text" class="form-control" id="name" name="name" required>
-								</div>
-								<div class="mb-3">
-								    <label for="email" class="form-label">Email address</label>
-								    <input type="email" class="form-control" id="email" name="email" required>
-								</div>
-								<div class="mb-3">
-								    <label for="phone" class="form-label">Phone Number</label>
-								    <input type="text" class="form-control" id="phone" name="phone" required>
-								</div>
-								<button type="submit" class="btn btn-primary">Register</button>
-                            </form>
-                        <div id="registerFormResponse"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
+		    aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title" id="registerModalLabel">Register for Nuru Con</h5>
+		                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		            </div>
+		            <div class="modal-body">
+		                {% if registration_open %}
+		                    <form id="registerForm" hx-post="{% url 'submit_registration' %}" hx-target="#registerFormResponse" hx-on::after-request="if(event.detail.successful) { this.reset(); closeModal('registerModal');  htmx.trigger('body', 'attendeesUpdated'); }">
+		                        {% csrf_token %}
+		                        <div class="mb-3">
+		                            <label for="name" class="form-label">Full Name</label>
+		                            <input type="text" class="form-control" id="name" name="name" required>
+		                        </div>
+		                        <div class="mb-3">
+		                            <label for="email" class="form-label">Email address</label>
+		                            <input type="email" class="form-control" id="email" name="email" required>
+		                        </div>
+		                        <div class="mb-3">
+		                            <label for="phone" class="form-label">Phone Number</label>
+		                            <input type="text" class="form-control" id="phone" name="phone" required>
+		                        </div>
+		                        <button type="submit" class="btn btn-primary">Register</button>
+		                    </form>
+		                    <div id="registerFormResponse"></div>
+					{% else %}
+					    <div class="alert alert-info text-center p-4 rounded-lg shadow-sm">
+					        <p class="mb-2">Registration is currently closed.</p>
+					        <p>For inquiries, please contact
+					            <a href="mailto:fuad@subcode.africa" class="font-semibold text-blue-600 hover:underline">
+					                fuad@subcode.africa
+					            </a>.
+					        </p>
+					    </div>
+					{% endif %}
+		            </div>
+		        </div>
+		    </div>
+		</div>
 
         <!-- Become a Speaker Modal -->
         <div class="modal fade" id="speakerModal" tabindex="-1" aria-labelledby="speakerModalLabel" aria-hidden="true">

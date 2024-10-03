@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .forms import SpeakerForm, RegistrationForm, SponsorForm
-from .models import Speaker, Sponsor, Registration, Schedule, MasterOfConference
+from .models import Setting, Speaker, Sponsor, Registration, Schedule, MasterOfConference
 from .tasks import send_admin_email
 
 
@@ -12,13 +12,20 @@ def index(request):
     sponsors = Sponsor.objects.filter(approved=True).values('name', 'logo', 'website')
     schedule = Schedule.objects.all()
     mc = MasterOfConference.objects.first()
+
+    registration_open = Setting.objects.filter(name="registration_open").first()
+
+    if not registration_open:
+        registration_open = True
+
     return render(request, "index.html", {
         'speaker_count': speaker_count,
         'registration_count': registration_count,
         'speakers': speakers,
         'sponsors': sponsors,
         'schedule': schedule,
-        'mc': mc
+        'mc': mc,
+        'registration_open': registration_open,
     })
 
 def submit_speaker(request):
